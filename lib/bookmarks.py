@@ -80,35 +80,6 @@ def read_one():
     print(record_name, '->', record_details, '->', record_url)
 
 
-def update(): 
-    print('To update a bookmark from our collection, please enter the name of the website you would like to update')
-    name = input('What is the name of the website?')
-    record = Bookmark.get(Bookmark.name == name)
-    print(f"How would you like to update '{name}'?")
-    choice = input("Select 'n' to update website name, 'u' to update website url, or 'd' to update website details")
-    if choice == 'n': 
-        new_name = input('Please enter new name of website')
-        record.name = new_name
-        record.save()
-        print(f"The new name for {name} is now {new_name}")
-    elif choice == 'u': 
-        new_url = input('Please enter the new url of the website')
-        record.url = new_url
-        record.save()
-        print(f"The new url for {name} is now {new_url}")
-    elif choice == 'd': 
-        new_details = input('Please enter the new details of the website')
-        record.details = new_details
-        record.save()
-        print(f"The new details for {name} are {new_details}")
-    else: 
-        option = input("Sorry that was not a valid choice. Select 'y' to try again or 'n' to leave bookmark collection" )
-        if option == 'y': 
-            update()
-        elif option == 'n': 
-            print('Goodbye!')
-        else: 
-            pass 
 
 
 def delete(): 
@@ -117,6 +88,7 @@ def delete():
     record = Bookmark.get(Bookmark.name == name)
     record.delete_instance()
     print(f"{name} has been deleted")
+
 
 intro()
 
