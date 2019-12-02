@@ -70,19 +70,24 @@ intro.grid(row = 0, column = 1, padx=20)
 
 #Create submit function 
 def submit(): 
+    #Insert into table 
+    record = Bookmark(name = new_name.get(), url = new_url.get(), details = new_details.get())
+    record.save()
+
     #Clear the text boxes 
-    name.delete(0, END)
-    url.delete(0, END)
-    details.delete(0, END)
+    new_name.delete(0, END)
+    new_url.delete(0, END)
+    new_details.delete(0, END)
+
 
 # Create text boxes 
 WIDTH = 30
-name = Entry(root, width = WIDTH)
-name.grid(row = 1, column = 1, padx = 20)
-url = Entry(root, width = WIDTH)
-url.grid(row = 2, column = 1)
-details = Entry(root, width = WIDTH)
-details.grid(row = 3, column = 1)
+new_name = Entry(root, width = WIDTH)
+new_name.grid(row = 1, column = 1, padx = 20)
+new_url = Entry(root, width = WIDTH)
+new_url.grid(row = 2, column = 1)
+new_details = Entry(root, width = WIDTH)
+new_details.grid(row = 3, column = 1)
 
 #Create labels for text boxes 
 
