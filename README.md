@@ -23,7 +23,9 @@ The purpose of this project was to build a python application with . full CRUD f
 ## Future Directions 
 This was my first attempt at building a python application in the command line. I would love to improve the layout/user interface of the GUI. Currently the GUI is on a separate branch from the master branch because the code for the application is so different between the branches. 
 
-#Issues 
+I'm most proud of figuring out how to use tkinter because I was able to build this GUI in less than 24 hours with no prior experience. 
+
+## Issues 
 If you find any issues or have suggestions on ways I can improve this application pleas submit them [here](https://github.com/MobolanleAdebesin/bookmark-collector/issues)
 
 
