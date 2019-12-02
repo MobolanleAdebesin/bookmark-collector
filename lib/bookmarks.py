@@ -87,7 +87,7 @@ def query():
     for site in query: 
         print_site += str(site.name) + '-' + str(site.details) + '-' + str(site.url) + "\n"
     query_label = Label(root, text=print_site)
-    query_label.grid(row = 11, column = 0, columnspan = 2)
+    query_label.grid(row = 8, column = 0, columnspan = 2)
 
 #Create a query single record function 
 def query_one(): 
@@ -97,7 +97,7 @@ def query_one():
     query_details = Bookmark.get(Bookmark.name == query_field.get()).details
     #creating a label for info 
     query_one_label = Label(root, text= query_name + '-' + query_url + '-' + query_details)
-    query_one_label.grid(row=14, column = 0, columnspan = 2)
+    query_one_label.grid(row=15, column = 0, columnspan = 2)
 
     query_field.delete(0, END)
 
@@ -107,6 +107,48 @@ def delete():
     record = Bookmark.get(Bookmark.name == delete_field.get())
     record.delete_instance()
     delete_field.delete(0, END)
+
+#Create update function to update bookmark
+def update():
+    editor = Tk()
+    editor.title('Update Bookmark')
+    intro_editor = Label(editor, text="Update Bookmark Records Here")
+    intro_editor.grid(row = 0, column = 1, padx=20)
+
+    #setting record_name equal to title entered in text_field
+    record_name = delete_field.get()
+
+    #querying the database for info
+    query_name = Bookmark.get(Bookmark.name == record_name).name
+    query_url = Bookmark.get(Bookmark.name == record_name).url
+    query_details = Bookmark.get(Bookmark.name == record_name).details
+
+    # Create text boxes in editor
+    WIDTH = 30
+    new_name_editor = Entry(editor, width = WIDTH)
+    new_name_editor.grid(row = 1, column = 1, padx = 20)
+    new_url_editor = Entry(editor, width = WIDTH)
+    new_url_editor.grid(row = 2, column = 1)
+    new_details_editor = Entry(editor, width = WIDTH)
+    new_details_editor.grid(row = 3, column = 1)
+ 
+    #Create labels for text boxes in editor
+    name_label_editor = Label(editor, text="Name")
+    name_label_editor.grid(row = 1, column = 0 )
+    url_label_editor = Label(editor, text = "Url")
+    url_label_editor.grid(row = 2, column = 0)
+    details_label_editor = Label(editor, text="Details")
+    details_label_editor.grid(row = 3, column = 0)
+
+    #pre-filling text fields with data from database
+    new_name_editor.insert(0, query_name)
+    new_url_editor.insert(0, query_url)
+    new_details_editor.insert(0, query_details)
+
+    #Create save button 
+    save_button = Button(editor, text="Save Changes")
+    save_button.grid(row=4, column=0, columnspan=2, padx = 10, pady = 10, ipadx = 122)
+  
 
 
 # Create text boxes 
@@ -120,7 +162,7 @@ new_details.grid(row = 3, column = 1)
 delete_field = Entry(root, width = WIDTH)
 delete_field.grid(row=9, column = 1)
 query_field = Entry(root, width=WIDTH)
-query_field.grid(row=12, column = 1)
+query_field.grid(row=13, column = 1)
 
 #Create labels for text boxes 
 
@@ -130,10 +172,10 @@ url_label = Label(root, text = "Url")
 url_label.grid(row = 2, column = 0)
 details_label = Label(root, text="Details")
 details_label.grid(row = 3, column = 0)
-delete_field_label = Label(root, text="Delete Site Name")
+delete_field_label = Label(root, text="Select Site Name")
 delete_field_label.grid(row=9, column=0 )
 query_field_label = Label(root, text="Find Bookmark")
-query_field_label.grid(row=12, column=0)
+query_field_label.grid(row=13, column=0)
 
 #Create a submit button 
 submit_button = Button(root, text="Add Record to Database", command=submit)
@@ -147,9 +189,13 @@ query_button.grid(row = 7, column = 0, columnspan = 2, padx = 10, pady = 10, ipa
 delete_button = Button(root, text="Delete Bookmark", command=delete)
 delete_button.grid(row = 10, column = 0, columnspan = 2, padx = 10, pady = 10, ipadx = 122)
 
+#Create an update button 
+update_button = Button(root, text="Update Bookmark", command=update)
+update_button.grid(row=11, column=0, columnspan=2, padx=10, pady=10, ipadx= 122)
+
 #Create a single query button 
 query_one_button = Button(root, text="Search Bookmark Name", command=query_one)
-query_one_button.grid(row=13, column=0, columnspan=2, padx=10, pady=10, ipadx=100)
+query_one_button.grid(row=14, column=0, columnspan=2, padx=10, pady=10, ipadx=100)
 
 
 # def create(): 
