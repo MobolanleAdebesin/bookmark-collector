@@ -70,7 +70,7 @@ def create():
 def read():
     query = Bookmark.select()
     for site in query: 
-        print(site.name, '->', site.details, ' ->', site.url)
+        print(site.name, '   ', site.details, '   ', site.url)
 
 def read_one(): 
     name = input('Please enter the name of the website you are looking for')
