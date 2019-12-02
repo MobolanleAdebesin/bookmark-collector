@@ -79,6 +79,15 @@ def submit():
     new_url.delete(0, END)
     new_details.delete(0, END)
 
+#Create query function 
+def query(): 
+    #Loop through results 
+    print_site = ''
+    query = Bookmark.select()
+    for site in query: 
+        print_site += str(site.name) + '-' + str(site.details) + '-' + str(site.url) + "\n"
+    query_label = Label(root, text=print_site)
+    query_label.grid(row=8, column=0, columnspan=2)
 
 # Create text boxes 
 WIDTH = 30
@@ -99,8 +108,12 @@ details_label = Label(root, text="Details")
 details_label.grid(row = 3, column = 0)
 
 #Create a submit button 
-submit_button = Button(root, text="Add record to database", command=submit)
+submit_button = Button(root, text="Add Record to Database", command=submit)
 submit_button.grid(row = 6, column = 0, columnspan = 2, padx = 10, pady = 10, ipadx = 100)
+
+#Create a query button 
+query_button = Button(root, text="Show All Bookmarks", command=query)
+query_button.grid(row = 7, column = 0, columnspan = 2, padx = 10, pady = 10, ipadx = 112)
 
 # def create(): 
 #     print("Each bookmark must include: the name of the website, the website url, and details about the bookmark")
