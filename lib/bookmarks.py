@@ -109,7 +109,17 @@ def delete():
     delete_field.delete(0, END)
 
 #Create update function to update bookmark
+def save_update(): 
+
+    new_record = Bookmark.get(Bookmark.name == query_name)
+    new_record.name = new_name_editor.get()
+    new_record.url = new_url_editor.get()
+    new_record.details = new_details_editor.get()
+    new_record.save()
+    editor.destroy()
+
 def update():
+    global editor
     editor = Tk()
     editor.title('Update Bookmark')
     intro_editor = Label(editor, text="Update Bookmark Records Here")
@@ -119,12 +129,16 @@ def update():
     record_name = delete_field.get()
 
     #querying the database for info
+    global query_name
     query_name = Bookmark.get(Bookmark.name == record_name).name
     query_url = Bookmark.get(Bookmark.name == record_name).url
     query_details = Bookmark.get(Bookmark.name == record_name).details
 
     # Create text boxes in editor
     WIDTH = 30
+    global new_name_editor
+    global new_url_editor
+    global new_details_editor
     new_name_editor = Entry(editor, width = WIDTH)
     new_name_editor.grid(row = 1, column = 1, padx = 20)
     new_url_editor = Entry(editor, width = WIDTH)
@@ -146,7 +160,7 @@ def update():
     new_details_editor.insert(0, query_details)
 
     #Create save button 
-    save_button = Button(editor, text="Save Changes")
+    save_button = Button(editor, text="Save Changes", command=save_update)
     save_button.grid(row=4, column=0, columnspan=2, padx = 10, pady = 10, ipadx = 122)
   
 
