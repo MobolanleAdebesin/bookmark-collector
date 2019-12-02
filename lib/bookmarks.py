@@ -87,7 +87,27 @@ def query():
     for site in query: 
         print_site += str(site.name) + '-' + str(site.details) + '-' + str(site.url) + "\n"
     query_label = Label(root, text=print_site)
-    query_label.grid(row=8, column=0, columnspan=2)
+    query_label.grid(row = 11, column = 0, columnspan = 2)
+
+#Create a query single record function 
+def query_one(): 
+    #querying the database for info
+    query_name = Bookmark.get(Bookmark.name == query_field.get()).name
+    query_url = Bookmark.get(Bookmark.name == query_field.get()).url
+    query_details = Bookmark.get(Bookmark.name == query_field.get()).details
+    #creating a label for info 
+    query_one_label = Label(root, text= query_name + '-' + query_url + '-' + query_details)
+    query_one_label.grid(row=14, column = 0, columnspan = 2)
+
+    query_field.delete(0, END)
+
+
+#Create delete function 
+def delete():
+    record = Bookmark.get(Bookmark.name == delete_field.get())
+    record.delete_instance()
+    delete_field.delete(0, END)
+
 
 # Create text boxes 
 WIDTH = 30
@@ -97,6 +117,10 @@ new_url = Entry(root, width = WIDTH)
 new_url.grid(row = 2, column = 1)
 new_details = Entry(root, width = WIDTH)
 new_details.grid(row = 3, column = 1)
+delete_field = Entry(root, width = WIDTH)
+delete_field.grid(row=9, column = 1)
+query_field = Entry(root, width=WIDTH)
+query_field.grid(row=12, column = 1)
 
 #Create labels for text boxes 
 
@@ -106,6 +130,10 @@ url_label = Label(root, text = "Url")
 url_label.grid(row = 2, column = 0)
 details_label = Label(root, text="Details")
 details_label.grid(row = 3, column = 0)
+delete_field_label = Label(root, text="Delete Site Name")
+delete_field_label.grid(row=9, column=0 )
+query_field_label = Label(root, text="Find Bookmark")
+query_field_label.grid(row=12, column=0)
 
 #Create a submit button 
 submit_button = Button(root, text="Add Record to Database", command=submit)
@@ -114,6 +142,15 @@ submit_button.grid(row = 6, column = 0, columnspan = 2, padx = 10, pady = 10, ip
 #Create a query button 
 query_button = Button(root, text="Show All Bookmarks", command=query)
 query_button.grid(row = 7, column = 0, columnspan = 2, padx = 10, pady = 10, ipadx = 112)
+
+#Create a delete button 
+delete_button = Button(root, text="Delete Bookmark", command=delete)
+delete_button.grid(row = 10, column = 0, columnspan = 2, padx = 10, pady = 10, ipadx = 122)
+
+#Create a single query button 
+query_one_button = Button(root, text="Search Bookmark Name", command=query_one)
+query_one_button.grid(row=13, column=0, columnspan=2, padx=10, pady=10, ipadx=100)
+
 
 # def create(): 
 #     print("Each bookmark must include: the name of the website, the website url, and details about the bookmark")
