@@ -9,6 +9,7 @@ verify_ssl = true
 peewee = "*"
 psycopg2-binary = "*"
 pillow = "*"
+pysimplegui = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
